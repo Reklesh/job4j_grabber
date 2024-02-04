@@ -29,7 +29,7 @@ public class AlertRabbit {
         try {
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
-            Class.forName(config.getProperty("driver_class"));
+            Class.forName(config.getProperty("driver"));
             try (Connection connection = DriverManager.getConnection(
                     config.getProperty("url"),
                     config.getProperty("username"),
@@ -60,7 +60,7 @@ public class AlertRabbit {
         @Override
         public void execute(JobExecutionContext context) {
             System.out.println("Rabbit runs here ...");
-            Connection connection = (Connection)context.getJobDetail().getJobDataMap().get("connection");
+            Connection connection = (Connection) context.getJobDetail().getJobDataMap().get("connection");
             try (PreparedStatement statement =
                          connection.prepareStatement("INSERT INTO rabbit(created_date) VALUES(?)")) {
                 statement.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
