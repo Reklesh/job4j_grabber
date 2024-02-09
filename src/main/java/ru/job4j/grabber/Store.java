@@ -8,4 +8,5 @@ public interface Store extends AutoCloseable {
     List<Post> getAll();
 
     Post findById(int id);
+
 }

@@ -27,8 +27,8 @@ public class PsqlStore implements Store {
     @Override
     public void save(Post post) {
         try (PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO post(name, text, link, created) VALUES(?, ?, ?, ?) " +
-                        "ON CONFLICT (link) DO NOTHING")) {
+                "INSERT INTO post(name, text, link, created) VALUES(?, ?, ?, ?)"
+                        + "ON CONFLICT (link) DO NOTHING")) {
             statement.setString(1, post.getTitle());
             statement.setString(2, post.getDescription());
             statement.setString(3, post.getLink());
@@ -96,6 +96,7 @@ public class PsqlStore implements Store {
                         "https://career.habr.com/vacancies/1000137127",
                         LocalDateTime.now().withNano(0)));
                 psqlStore.getAll().forEach(System.out::println);
+                System.out.println(psqlStore.findById(1));
             }
         } catch (Exception e) {
             e.printStackTrace();

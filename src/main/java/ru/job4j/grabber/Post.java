@@ -84,4 +84,5 @@ public class Post {
         return String.format("Post{ id: %s, title: %s, description: %s, link: %s, created: %s",
                 id, title, description, link, created);
     }
+
 }
