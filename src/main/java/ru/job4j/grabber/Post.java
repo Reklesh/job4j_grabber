@@ -7,15 +7,22 @@ public class Post {
 
     private int id;
     private String title;
-    private String link;
     private String description;
+    private String link;
     private final LocalDateTime created;
 
-    public Post(int id, String title, String link, String description, LocalDateTime created) {
+    public Post(int id, String title, String description, String link, LocalDateTime created) {
         this.id = id;
         this.title = title;
-        this.link = link;
         this.description = description;
+        this.link = link;
+        this.created = created;
+    }
+
+    public Post(String title, String description, String link, LocalDateTime created) {
+        this.title = title;
+        this.description = description;
+        this.link = link;
         this.created = created;
     }
 
@@ -35,20 +42,20 @@ public class Post {
         this.title = title;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public LocalDateTime getCreated() {
@@ -74,7 +81,7 @@ public class Post {
 
     @Override
     public String toString() {
-        return String.format("Post{ id: %s, title: %s, link: %s, description: %s, created: %s",
-                id, title, link, description, created);
+        return String.format("Post{ id: %s, title: %s, description: %s, link: %s, created: %s",
+                id, title, description, link, created);
     }
 }
