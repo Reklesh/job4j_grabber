@@ -1,8 +1,6 @@
 package ru.job4j.grabber;
 
-import java.io.InputStream;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -83,23 +81,6 @@ public class PsqlStore implements Store {
     public void close() throws Exception {
         if (connection != null) {
             connection.close();
-        }
-    }
-
-    public static void main(String[] args) {
-        Properties config = new Properties();
-        try (InputStream input = PsqlStore.class.getClassLoader().getResourceAsStream("grabber.properties")) {
-            config.load(input);
-            try (Store psqlStore = new PsqlStore(config)) {
-                psqlStore.save(new Post("Java Developer",
-                        "Описание вакансии",
-                        "https://career.habr.com/vacancies/1000137127",
-                        LocalDateTime.now().withNano(0)));
-                psqlStore.getAll().forEach(System.out::println);
-                System.out.println(psqlStore.findById(1));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
